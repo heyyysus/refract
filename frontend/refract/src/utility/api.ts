@@ -9,7 +9,7 @@
  */
 export async function runModel(imageFile: File): Promise<string | void> {
     const apiEndpoint: string = process.env.API_ENDPOINT || '';
-    if (apiEndpoint == '') {
+    if (apiEndpoint === '') {
         throw new Error('API endpoint not found in environment variables');
     }
     

@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       {/* UI Container  */}
       <div className='flex justify-center'>
-        <ModelUI className='w-1/2 flex content-center mt-10' 
+        <ModelUI className='flex content-center mt-10' 
           outputImage={ outputImage } 
           handleRunModel={ handleRunModel } 
         />
