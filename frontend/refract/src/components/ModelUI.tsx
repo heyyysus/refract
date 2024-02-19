@@ -33,8 +33,8 @@ const ModelUI: React.FC<ModelUIProps> = ({ className, outputImage, handleRunMode
     return (
         <div className={`${className} flex flex-row align-start`}>
             <div className='flex flex-col'>
-                <span className='text-lg font-bold'>Uploaded Image</span>
-                <div className="inline-flex border-black border-solid border-2 mb-5">
+                <span className='text-lg font-bold mb-3'>Uploaded Image</span>
+                <div className="inline-flex mb-5">
                 {
                     inputImage ? (<img src={URL.createObjectURL(inputImage)} alt="Uploaded Image" />) : (
                     <div className='w-[400px] h-[400px] bg-gray-200'></div>
@@ -65,8 +65,8 @@ const ModelUI: React.FC<ModelUIProps> = ({ className, outputImage, handleRunMode
             </div>
            
             <div className='flex flex-col ml-10'>
-                <span className='text-lg font-bold'>Model Output</span>
-                <div className="inline-flex border-black border-solid border-2 mb-2">
+                <span className='text-lg font-bold mb-3'>Model Output</span>
+                <div className="inline-flex mb-2">
                 {
                     outputImage ? (<img src={outputImage} alt="Model Output" />) : (
                     <div className='w-[400px] h-[400px] bg-gray-200'></div>
