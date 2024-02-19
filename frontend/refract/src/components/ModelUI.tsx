@@ -1,4 +1,25 @@
 import React from 'react';
+ 
+export interface RunButtonProps {
+    onClick: () => Promise<void>;
+    disabled?: boolean;
+}
+
+
+const RunButton: React.FC<RunButtonProps> = ({ onClick, disabled }) => {
+
+    const buttonClass = disabled ? 'bg-blue-300 text-white font-bold py-2 px-4 rounded mt-5' : 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5';
+
+    return (
+        <button
+            className={ buttonClass }
+            onClick={onClick}
+            disabled={disabled}
+        >
+            Run Model
+        </button>
+    );
+}
 
 export interface ModelUIProps {
     className?: string;
@@ -19,6 +40,7 @@ const ModelUI: React.FC<ModelUIProps> = ({ className, outputImage, handleRunMode
                 )
             }
             </div>
+            <div className='flex flex-col align-start'>
             <input
                 type="file"
                 accept="image/*"
@@ -29,6 +51,17 @@ const ModelUI: React.FC<ModelUIProps> = ({ className, outputImage, handleRunMode
                     }
                 }}
             />
+
+            <RunButton
+                onClick={async () => {
+                    if (inputImage) {
+                        await handleRunModel(inputImage);
+                    }
+                }}
+                disabled={!inputImage}
+            />
+            </div>
+
             <span className='text-lg font-bold mt-10'>Model Output</span>
             <div className="inline-flex border-black border-solid border-2">
             {

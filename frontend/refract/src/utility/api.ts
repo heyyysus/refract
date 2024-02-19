@@ -9,15 +9,16 @@
  */
 export async function uploadImage(imageFile: File): Promise<string | void> {
     const apiEndpoint: string = process.env.API_ENDPOINT || '';
+    if (apiEndpoint == '') {
+        throw new Error('API endpoint not found in environment variables');
+    }
+    
     const url = new URL(`${apiEndpoint}/upload-image`);
     const method = 'POST';
     const headers = {
         'Content-Type': 'multipart/form-data',
     };
 
-    if (!apiEndpoint) {
-        throw new Error('API endpoint not found in environment variables');
-    }
 
     const formData = new FormData();
     formData.append('image', imageFile);
