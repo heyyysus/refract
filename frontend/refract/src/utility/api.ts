@@ -2,12 +2,12 @@
 /**
  * 
  * @param imageFile - The image file to upload
- * @returns The URL of the uploaded image
+ * @returns The URL of the output image
  * 
  * Will throw an error if the API endpoint is not found in the environment variables or 
  * if the fetch request fails
  */
-export async function uploadImage(imageFile: File): Promise<string | void> {
+export async function runModel(imageFile: File): Promise<string | void> {
     const apiEndpoint: string = process.env.API_ENDPOINT || '';
     if (apiEndpoint == '') {
         throw new Error('API endpoint not found in environment variables');

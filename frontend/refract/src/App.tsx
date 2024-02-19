@@ -3,7 +3,7 @@ import './App.css';
 
 import ModelUI from './components/ModelUI';
 
-import { uploadImage } from './utility/api';
+import { runModel } from './utility/api';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
   const handleRunModel = async (inputImage: File): Promise<void> => {
     console.log('Running Model');
     try {
-      const imageUrl = await uploadImage(inputImage);
+      const imageUrl = await runModel(inputImage);
       if (imageUrl) {
         setOutputImage(imageUrl);
       }
