@@ -30,6 +30,8 @@ export interface ModelUIProps {
 const ModelUI: React.FC<ModelUIProps> = ({ className, outputImage, handleRunModel }) => {
     const [inputImage, setInputImage] = React.useState<File | null>(null);
 
+    
+
     return (
         <div className={`${className} flex flex-row align-start`}>
             <div className='flex flex-col'>
