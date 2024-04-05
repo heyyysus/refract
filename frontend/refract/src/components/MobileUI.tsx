@@ -62,7 +62,9 @@ export const MobileUI: React.FC<MobileUIProps> = ({ className, outputImage, hand
             <div className="flex justify-center items-center px-16 py-5 mt-5 rounded-2xl bg-slate-400">
               <div className="flex flex-col max-w-full w-[108px]">
                 <div className="self-end">Intensity</div>
-                <div className="shrink-0 mt-5 bg-indigo-100 border-4 border-indigo-100 border-solid h-[17px] rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" />
+                <div className="container mx-auto px-4">
+                  <input type="range" className="w-4/5 bg-white h-2 rounded-lg appearance-none cursor-pointer" />
+                </div>
               </div>
             </div>
             <div className="flex flex-col justify-center items-center px-16 py-5 mt-4 rounded-2xl bg-slate-400">
