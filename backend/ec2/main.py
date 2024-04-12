@@ -1,29 +1,34 @@
-from flask import Flask
-from flask import request
 from model.process_image import process_image
 import numpy as np
-import cv2
 import time
 import datetime
+import boto3
 
-app = Flask(__name__)
+# Check latest job from DynamoDB
+def check_latest_job():
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('refract_jobs')
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+    response = table.scan()
+    items = response['Items']
 
-@app.route('/run-model', methods=['POST'])
-def run_model():
-    file = request.files['image']
-    image = process_image(file)
-    time_str = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+    latest_job = items[0]
+    for item in items:
+        if item['timestamp'] > latest_job['timestamp']:
+            latest_job = item
 
-    # Save the image as a PNG file
-    filename = 'saves/{}.png'.format(time_str)
-    cv2.imwrite(filename, image)
+    return latest_job
 
-    return filename
+def main():
+    while(True):
+        start_time = time.time()
 
+        job = check_latest_job()
+        print(job)
+
+        end_time = time.time()
+        time.sleep(5)
+        
 
 if __name__ == '__main__':
-    app.run()
+    main()
