@@ -1,5 +1,5 @@
 # Use a base image with Python pre-installed
-FROM python:3.9-slim
+FROM --platform=linux/amd64 python:3.9
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -10,12 +10,19 @@ COPY requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-COPY ./model/*.py /model/
+COPY ./model/*.py model/
 
 COPY main.py .
 
-RUN mkdir /tmp/
+COPY credentials.csv .
+
+RUN mkdir tmp/
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+RUN unzip awscliv2.zip
+
+RUN ./aws/install
 
 # Set the command to run when the container starts
 CMD ["python", "main.py"]
