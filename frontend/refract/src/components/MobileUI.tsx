@@ -11,6 +11,8 @@ export const MobileUI: React.FC<MobileUIProps> = ({
   outputImage,
   handleRunModel,
 }) => {
+  const [state, setState] = React.useState<"no file" | "file chosen" | "loading" | "loaded">("file chosen");
+
   const [inputImage, setInputImage] = React.useState<File | null>(null);
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -26,6 +28,12 @@ export const MobileUI: React.FC<MobileUIProps> = ({
     }
   };
 
+  const onRunModel = () => {
+      setState("loading");
+      // insert code to actually load...
+      setState("loaded");
+  }
+
   return (
     <div className="flex flex-col items-center mx-auto w-full bg-slate-600 font-mono max-w-[480px] overflow-auto">
       <div className="flex gap-0 justify-center self-stretch px-5">
@@ -37,17 +45,24 @@ export const MobileUI: React.FC<MobileUIProps> = ({
             <div className="flex flex-col flex-1 items-stretch text-white">
               <div className="flex flex-row justify-between	">
                 <div className="font-bold">1. Upload Image</div>
-                <div className="text-slate-300">image.png</div>
+
+                {/* <div className="text-slate-300">image.png</div> */}
               </div>
-              <div className="">
-                <input
+
+              {/* <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"></input> */}
+
+
+              <div className="flex justify-center">
+                {/* <input
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
                   style={{ display: "none" }}
                   ref={fileInputRef}
-                />
-                <button
+                /> */}
+                <input className="grow justify-center self-center py-3.5 mt-5 rounded-2xl dark:bg-gray-700" id="file_input" type="file" accept="image/* onChange={handleFileChange}"></input>
+
+                {/* <button
                   className="grow justify-center self-center px-9 py-3.5 mr-2 mt-5 rounded-2xl
                   bg-[#9F7DFF] hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
                   onClick={(e: any) => {
@@ -55,58 +70,65 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                   }}
                 >
                   Upload
-                </button>
-                <button
-                  className="grow justify-center self-center px-9 py-3.5 ml-2 mt-5 text-black bg-indigo-200 rounded-2xl
-                 hover:bg-indigo-300 active:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-100"
-                >
-                  Clear File
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
           <div className="flex flex-col px-9 py-6 mt-3 text-white rounded-2xl bg-slate-500">
-            {/* fhweuaifhiuhHIFUEWHAIFUHWEILUFAEHEWUAIFWA */}
             <div className="self-start font-bold">2. Adjust settings</div>
             <div className="flex flex-col justify-center items-center px-10 py-5 mt-4 rounded-2xl bg-slate-400">
               <div className="pb-2 flex flex-col max-w-full">
                 <div>Intensity</div>
               </div>
-              <div className="container mx-2">
-                <input
-                  type="range"
-                  className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
+              <div className="container relative mx-2 mb-6">
+                <input 
+                id="labels-range-input" type="range" step="25"  
+                className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
                 />
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-0 -bottom-6">Min</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Low</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Med</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-3/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">High</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute end-0 -bottom-6">Max</span>
               </div>
             </div>
             <div className="flex flex-col justify-center items-center px-10 py-5 mt-4 rounded-2xl bg-slate-400">
               <div className="pb-2 flex flex-col max-w-full">
                 <div>Render Quality</div>
               </div>
-              <div className="container mx-2">
-                <input
-                  type="range"
-                  className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
+              <div className="container relative mx-2 mb-6">
+                <input 
+                id="labels-range-input" type="range" step="25" 
+                className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
                 />
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-0 -bottom-6">Min</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Med</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">High</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-3/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Higher</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500 absolute end-0 -bottom-6">Max</span>
               </div>
             </div>
             <button
               className="grow justify-center self-center px-9 py-3.5 mt-4 text-black bg-indigo-200 rounded-2xl
             hover:bg-indigo-300 active:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-100"
+                onClick={onRunModel}
             >
-              Start!
+              Run model
             </button>
           </div>
           {/* <div className="shrink-0 self-end mt-5 rounded border border-solid bg-slate-600 bg-opacity-50 border-white border-opacity-50 h-[275px] w-[9px]" /> */}
 
           <div className="flex flex-col items-center px-9 py-6 mt-3 text-white whitespace-nowrap rounded-2xl bg-slate-500">
-            <div className="flex self-start font-bold">3. Resulting image:</div>
+            <div className="flex self-start font-bold">3. Results</div>
+            {state === "loading" && <div className="flex flex-col justify-center items-center px-10 py-5 mt-4 rounded-2xl bg-slate-400">
+                <div>Processing...</div>
+            </div>}
             <img
               className="h-full w-full mt-4 object-cover"
               src="https://images.pexels.com/photos/821944/pexels-photo-821944.jpeg?cs=srgb&dl=pexels-george-desipris-821944.jpg&fm=jpg"
             />
             <button
-              className="grow justify-center self-center px-9 py-3.5 mt-3 mb-3 text-black bg-indigo-200 rounded-2xl
+              className="grow justify-center self-center px-9 p-3.5 mt-3 mb-3 text-black bg-indigo-200 rounded-2xl
        hover:bg-indigo-300 active:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-100"
             >
               Download
