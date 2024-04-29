@@ -62,7 +62,7 @@ def main():
                     job['status'] = "processing"    
                     table.put_item(Item=job)
 
-                    refract_image = run_model(
+                    successful = run_model(
                         compress_size=compress_size,
                         p_allow=p_allow, 
                         alpha=alpha, 

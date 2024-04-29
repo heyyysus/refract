@@ -12,7 +12,9 @@ def run_model(compress_size = 512, p_allow = 0.0, alpha = 5, input_path = None, 
         return False
 
     # Save the cloaked image
-    model.save_image(x_cloaked, input_path, x_box, output_path)
+    image = model.save_image(x_cloaked, input_path, x_box, output_path)
+
+    image.save(output_path)
 
     return True
 
