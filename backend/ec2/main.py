@@ -72,10 +72,6 @@ def main():
 
                     print("Refract finished running")
 
-                    refract_image.save(output_path)
-
-                    print("Refract image saved")
-
                     # Upload image to S3
                     s3 = boto3.client('s3')
                     s3.upload_file(output_path, 'refract-data', f"{job['job_id']}-out.{ext}")
