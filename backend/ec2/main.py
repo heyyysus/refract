@@ -1,5 +1,6 @@
 from model.process_image import process_image
 from model.refract import RunRefract
+from model.run_model import run_model
 import numpy as np
 import time
 import datetime
@@ -39,6 +40,11 @@ def main():
             print(job)
 
             input_url = job['input_url']
+            compress_size = int(job['compress_size'])
+            p_allow = float(job['p_allow'])
+            alpha = float(job['alpha'])
+
+
             ext = input_url.split('.')[-1]
 
             # Get image and download to ./tmp/
@@ -47,6 +53,7 @@ def main():
             try:
                 response = requests.get(input_url)
                 input_path = f"./tmp/{job['job_id']}-in.{ext}"
+                output_path = f"./tmp/{job['job_id']}-out.{ext}"
                 
                 if response.status_code == 200:
                     with open(input_path, 'wb') as file:
@@ -55,11 +62,16 @@ def main():
                     job['status'] = "processing"    
                     table.put_item(Item=job)
 
-                    refract_image = RunRefract(input_path)
+                    refract_image = run_model(
+                        compress_size=compress_size,
+                        p_allow=p_allow, 
+                        alpha=alpha, 
+                        input_path=input_path,
+                        output_path=output_path
+                    )
 
                     print("Refract finished running")
 
-                    output_path = f"./tmp/{job['job_id']}-out.{ext}"
                     refract_image.save(output_path)
 
                     print("Refract image saved")

@@ -1,3 +1,6 @@
 *.zip
 package
 credentials.csv
+ec2/tpdne
+ec2/embeddings
+__pycache__
