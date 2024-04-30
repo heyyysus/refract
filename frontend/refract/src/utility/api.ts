@@ -13,6 +13,7 @@ export interface JobStatus {
     output_url?: string;
 };
 
+/* SET IN VERCEL */
 export const s3BucketURL: string = process.env.S3_BUCKET_URL || '';
 export const apiEndpoint: string = process.env.API_ENDPOINT || '';
 
