@@ -129,7 +129,8 @@ export async function uploadImage(imageFile: File, uploadLink: string): Promise<
             mode: 'cors',
             body: imageFile,
             headers: {
-             "Content-type": imageFile.type
+             "Content-type": imageFile.type,
+             "Access-Control-Allow-Origin": "*",
             }
            });
         if (response.ok) {
