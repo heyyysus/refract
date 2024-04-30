@@ -130,7 +130,6 @@ export async function uploadImage(imageFile: File, uploadLink: string): Promise<
             body: imageFile,
             headers: {
              "Content-type": imageFile.type,
-             "Access-Control-Allow-Origin": "*",
             }
            });
         if (response.ok) {
