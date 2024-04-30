@@ -28,6 +28,9 @@ function App() {
 
       const uploadLink = await getUploadLinkURL(extension);
 
+      console.log("Upload Link: ");
+      console.log(uploadLink);
+
       if (uploadLink === undefined) {
         throw new Error('Error getting upload link');
       }
