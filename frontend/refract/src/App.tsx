@@ -29,7 +29,7 @@ function App() {
 
       await uploadImage(inputImage, uploadLink.url);
 
-      const input_path = `{s3BucketURL}/in/${uploadLink.filename}`;
+      const input_path = `${s3BucketURL}/in/${uploadLink.filename}`;
 
       const job_id = await queueModel(input_path, compress_size, p_allow, alpha);
 
