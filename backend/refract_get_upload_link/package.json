@@ -1,0 +1,28 @@
+{
+  "name": "upload-profile-image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc && cd dist && zip -r ./lambda.zip ./* && cp ./lambda.zip ../aws_dist/lambda.zip && rm ./lambda.zip",
+    "deploy": "aws lambda update-function-code --function-name=hoppin-getImageUploadLink --zip-file fileb://aws_dist/lambda.zip",
+    "update-deps": "cp -r package*.json dist/ && cd ./dist && npm i && rm package*.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.290.0",
+    "@aws-sdk/s3-presigned-post": "^3.290.0",
+    "@aws-sdk/s3-request-presigner": "^3.290.0",
+    "aws-lambda": "^1.0.7",
+    "aws-lambda-multipart-parser": "^0.1.3",
+    "aws-sdk": "^2.1329.0",
+    "pg": "^8.9.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.111",
+    "@types/pg": "^8.6.6",
+    "typescript": "^4.9.5"
+  }
+}
