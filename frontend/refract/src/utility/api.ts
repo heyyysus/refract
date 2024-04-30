@@ -16,7 +16,7 @@ export interface JobStatus {
 /* SET IN VERCEL */
 /* HARDCODED FOR TESTING */
 export const s3BucketURL: string = process.env.S3_BUCKET_URL || 'http://refract-data.s3-website-us-west-2.amazonaws.com';
-export const apiEndpoint: string = process.env.API_ENDPOINT || 'https://qzklhiba4m.execute-api.us-west-1.amazonaws.com/';
+export const apiEndpoint: string = process.env.API_ENDPOINT || 'https://qzklhiba4m.execute-api.us-west-1.amazonaws.com';
 
 if (apiEndpoint === '') {
     console.error('API_ENDPOINT not found in environment variables');
