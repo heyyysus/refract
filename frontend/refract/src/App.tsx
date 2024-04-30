@@ -21,7 +21,12 @@ function App() {
     const alpha = 5.00;
 
     try {
-      const uploadLink = await getUploadLinkURL(inputImage.name.split('.').pop()?.toLowerCase() || '');
+      const extension = inputImage.name.split('.').pop()?.toLowerCase() || '';
+
+      console.log(inputImage);
+      console.log(extension);
+
+      const uploadLink = await getUploadLinkURL(extension);
 
       if (uploadLink === undefined) {
         throw new Error('Error getting upload link');
