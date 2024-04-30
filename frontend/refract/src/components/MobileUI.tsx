@@ -115,8 +115,8 @@ export const MobileUI: React.FC<MobileUIProps> = ({
               </div>
             </div>
             <button
-              className="grow justify-center self-center px-9 py-3.5 mt-4 disabled:text-gray-400 enabled:text-black disabled:bg-indigo-200 
-              bg-indigo-100 rounded-2xl enabled:hover:bg-indigo-300 enabled:bg-indigo-400 enabled:focus:outline-none enabled:focus:ring enabled:focus:ring-indigo-100 disabled:cursor-not-allowed"
+              className="grow justify-center self-center px-9 py-3.5 mt-4 disabled:text-gray-400 active:text-black disabled:bg-indigo-200 
+              bg-indigo-100 rounded-2xl active:hover:bg-indigo-300 active:bg-indigo-400 active:focus:outline-none active:focus:ring active:focus:ring-indigo-100 disabled:cursor-not-allowed"
               onClick={() => {if(state === "chose file")onRunModel()}}
               disabled={state !== "chose file"}
             >
