@@ -48,6 +48,7 @@ export async function queueModel(
     const method = 'POST';
     const headers = {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         // 'Authorization': `Bearer ${auth_token}`,
     };
     
@@ -90,6 +91,7 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
     };
     
     const options = {
@@ -125,9 +127,15 @@ export async function uploadImage(imageFile: File, uploadLink: string): Promise<
     const formData = new FormData();
     formData.append('file', imageFile);
 
+    const headers = {
+        'Content-Type': 'image/jpeg',
+        'Access-Control-Allow-Origin': '*',
+    };
+
     const options = {
         method: 'PUT',
         body: formData,
+        headers,
     };
 
     try {
@@ -158,6 +166,7 @@ export async function getJobStatus(job_id: number): Promise<JobStatus | void> {
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
     };
     
     const options = {
