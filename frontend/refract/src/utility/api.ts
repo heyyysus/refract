@@ -16,30 +16,26 @@ export interface JobStatus {
 const s3BucketURL: string = process.env.S3_BUCKET_URL || '';
 const apiEndpoint: string = process.env.API_ENDPOINT || '';
 
+if (apiEndpoint === '') {
+    console.error('API_ENDPOINT not found in environment variables');
+}
+
+if (s3BucketURL === '') {
+    console.error('S3_BUCKET_URL not found in environment variables');
+}
+
 /**
  * 
  * @param imageFile - The image file to upload
  * @returns The URL of the output image
  * 
- * Will throw an error if the API endpoint is not found in the environment variables or 
- * if the fetch request fails
  */
-
-
 export async function queueModel(
     input_url: string, 
     compress_size: number, 
     p_allow: number, 
     alpha: number
 ): Promise<number | void> {
-    
-    if (apiEndpoint === '') {
-        throw new Error('API_ENDPOINT not found in environment variables');
-    }
-
-    if (s3BucketURL === '') {
-        throw new Error('S3_BUCKET_URL not found in environment variables');
-    }
     
     const url = new URL(`${apiEndpoint}/queue_refract_model`);
     url.searchParams.append('input_url', input_url);
@@ -76,6 +72,12 @@ export async function queueModel(
     }
 }
 
+/** 
+ * 
+ * @param ext - The file extension of the image to upload
+ * @returns The presigned URL to upload the image to
+ * 
+ **/
 export async function getUploadLinkURL(ext: string): Promise< {url: string, filename: string} | void > {
     if (apiEndpoint === '') {
         throw new Error('API_ENDPOINT not found in environment variables');
@@ -110,6 +112,13 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
     }
 }
 
+/** 
+ * 
+ * @param imageFile - The image file to upload
+ * @param uploadLink - The presigned URL to upload the image to
+ * @returns The URL of the uploaded image
+ * 
+ **/
 export async function uploadImage(imageFile: File, uploadLink: string): Promise<string | void> {
     const formData = new FormData();
     formData.append('file', imageFile);
