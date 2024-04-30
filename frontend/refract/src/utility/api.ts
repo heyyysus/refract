@@ -109,6 +109,7 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
             data.then((json) => {
                 return json;
             }).catch((error) => {
+                console.log(error);
                 throw error;
             }
         );
