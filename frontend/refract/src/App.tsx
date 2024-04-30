@@ -4,7 +4,7 @@ import './App.css';
 
 import { MobileUI } from './components/MobileUI';
 
-import { runModel } from './utility/api';
+import { queueModel, getUploadLinkURL, getJobStatus, uploadImage, s3BucketURL } from './utility/api';
 import LoginPage from './LoginPage';
 
 function App() {
@@ -15,17 +15,40 @@ function App() {
 
   const handleRunModel = async (inputImage: File): Promise<void> => {
     console.log('Running Model');
+
+    const compress_size = 160;
+    const p_allow = 0.00;
+    const alpha = 5.00;
+
     try {
-      // const access_token = await getAccessTokenSilently();
-      const access_token = "";
-      const imageUrl = await runModel(inputImage, access_token);
-      if (imageUrl) {
-        setOutputImage(imageUrl);
+      const uploadLink = await getUploadLinkURL(inputImage.name.split('.').pop() || '');
+
+      if (uploadLink === undefined) {
+        throw new Error('Error getting upload link');
       }
+
+      await uploadImage(inputImage, uploadLink.url);
+
+      const input_path = `{s3BucketURL}/in/${uploadLink.filename}`;
+
+      const job_id = await queueModel(input_path, compress_size, p_allow, alpha);
+
+      if (job_id === undefined) {
+        throw new Error('Error queuing model');
+      }
+
+      let status = 'queued';
+      while (status === 'queued' || status === 'running') {
+        const job_status = await getJobStatus(job_id);
+        status = job_status ? job_status.status : 'error';
+        console.log(status);
+
+      }
+
     } catch (error) {
-      // Handle Error in the UI
       console.error(error);
     }
+    
   };
 
 
