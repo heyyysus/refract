@@ -13,8 +13,8 @@ export interface JobStatus {
     output_url?: string;
 };
 
-const s3BucketURL: string = process.env.S3_BUCKET_URL || '';
-const apiEndpoint: string = process.env.API_ENDPOINT || '';
+export const s3BucketURL: string = process.env.S3_BUCKET_URL || '';
+export const apiEndpoint: string = process.env.API_ENDPOINT || '';
 
 if (apiEndpoint === '') {
     console.error('API_ENDPOINT not found in environment variables');
@@ -26,8 +26,8 @@ if (s3BucketURL === '') {
 
 /**
  * 
- * @param imageFile - The image file to upload
- * @returns The URL of the output image
+ * @param input_url - The URL of the input image
+ * @returns job_id - The ID of the job
  * 
  */
 export async function queueModel(
@@ -138,6 +138,13 @@ export async function uploadImage(imageFile: File, uploadLink: string): Promise<
         throw new Error('Error uploading image');
     }
 }
+
+/** 
+ * 
+ * @param job_id - The ID of the job
+ * @returns The status of the job
+ * 
+ **/
 
 export async function getJobStatus(job_id: number): Promise<JobStatus | void> {
     if (apiEndpoint === '') {
