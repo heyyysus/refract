@@ -122,22 +122,16 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
  * 
  **/
 export async function uploadImage(imageFile: File, uploadLink: string): Promise<string | void> {
-    const formData = new FormData();
-    formData.append('file', imageFile);
-
-    const headers = {
-        'Content-Type': 'image/jpeg',
-        'Access-Control-Allow-Origin': '*',
-    };
-
-    const options = {
-        method: 'PUT',
-        body: formData,
-        headers,
-    };
 
     try {
-        const response = await fetch(uploadLink, options);
+        const response = await fetch(uploadLink, {
+            method: "PUT",
+            mode: 'cors',
+            body: imageFile,
+            headers: {
+             "Content-type": imageFile.type
+            }
+           });
         if (response.ok) {
             return uploadLink;
         }
