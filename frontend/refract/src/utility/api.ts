@@ -105,16 +105,8 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
     try {
         const response = await fetch(url.toString(), options);
         if (response.ok) {
-            const data = response.json();
-
-            console.log(data);
-
-            data.then((json) => {
-                return json;
-            }).catch((error) => {
-                console.log(error);
-                throw error;
-            });
+            const data = await response.json();
+            return data;
         }
     } catch (error) {
         console.error(error);
