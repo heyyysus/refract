@@ -24,7 +24,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({ className, outputImage, hand
   };
 
   return (
-    <div className="flex flex-col items-center mx-auto w-full bg-slate-600 font-serif max-w-[480px]">
+    <div className="flex flex-col items-center mx-auto w-full bg-slate-600 font-Segoe UI Emoji max-w-[480px]">
       <div className="flex gap-0 justify-center self-stretch px-5">
         <div className="flex gap-1 justify-center px-11 py-6 text-lg tracking-tight leading-3 text-center text-black whitespace-nowrap font-[590]"></div>
       </div>
