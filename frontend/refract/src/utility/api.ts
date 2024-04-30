@@ -88,6 +88,9 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
 
     const url = new URL(`${apiEndpoint}/refract_get_upload_link`);
     url.searchParams.append('extension', ext);
+
+    console.log(`getUploadLinkUrl: ${url.toString()}`);
+
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
