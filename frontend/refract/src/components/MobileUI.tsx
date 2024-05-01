@@ -70,7 +70,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                 
                 {/* <button
                   className="grow justify-center self-center px-9 py-3.5 mr-2 mt-5 rounded-2xl
-                  bg-[#9F7DFF] hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+                  bg-[#9F7DFF] hover:bg-violet-600 enabled:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
                   onClick={(e: any) => {
                     handleButtonClick();
                   }}
@@ -115,10 +115,13 @@ export const MobileUI: React.FC<MobileUIProps> = ({
               </div>
             </div>
             <button
-              className="grow justify-center self-center px-9 py-3.5 mt-4 disabled:text-gray-400 active:text-black disabled:bg-indigo-200 
-              bg-indigo-100 rounded-2xl active:hover:bg-indigo-300 active:bg-indigo-400 active:focus:outline-none active:focus:ring active:focus:ring-indigo-100 disabled:cursor-not-allowed"
-              onClick={() => {if(state === "chose file")onRunModel()}}
-              disabled={state !== "chose file"}
+              className="grow justify-center self-center px-9 py-3.5 mt-4 
+              disabled:text-gray-400 enabled:text-black 
+              disabled:bg-indigo-200 bg-indigo-100 rounded-2xl 
+              enabled:hover:bg-indigo-300 enabled:bg-indigo-400 
+              enabled:focus:outline-none enabled:focus:ring enabled:focus:ring-indigo-100 disabled:cursor-not-allowed"
+              onClick={() => {if(state === "chose file" || state === "finished" || state === "choose again")onRunModel()}}
+              disabled={state in ["start", "processing", "clear file"]}
             >
               Run model
             </button>
@@ -133,13 +136,15 @@ export const MobileUI: React.FC<MobileUIProps> = ({
             {state === "finished" && 
             <img
               className="h-full w-full mt-4 object-cover"
-              src="https://images.pexels.com/photos/821944/pexels-photo-821944.jpeg?cs=srgb&dl=pexels-george-desipris-821944.jpg&fm=jpg"
+              src={outputImage || 'https://m.media-amazon.com/images/I/51y8GUVKJoL.jpg'}
             />}
-            <a href="https://m.media-amazon.com/images/I/51y8GUVKJoL.jpg" download target="_blank">
+            <a href={outputImage || 'https://m.media-amazon.com/images/I/51y8GUVKJoL.jpg'} download target="_blank">
               <button
-                className="grow justify-center self-center px-9 p-3.5 mt-3 mb-3 text-black bg-indigo-200 rounded-2xl
-                hover:bg-indigo-300 active:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-100
-                disabled:text-gray-400 active:text-black disabled:bg-indigo-100"
+                className="grow justify-center self-center px-9 p-3.5 mt-3 mb-3 
+                disabled:text-gray-400 enabled:text-black 
+                disabled:bg-indigo-200 bg-indigo-100 rounded-2xl 
+                enabled:hover:bg-indigo-300 enabled:bg-indigo-400 
+                enabled:focus:outline-none enabled:focus:ring enabled:focus:ring-indigo-100 disabled:cursor-not-allowed"
               > Open in Browser </button></a>
           </div>
         </div>
