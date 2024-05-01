@@ -122,6 +122,9 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
  **/
 export async function uploadImage(imageFile: File, uploadLink: string): Promise<string | void> {
 
+    console.log("uploadImage: ");
+    console.log(imageFile);
+
     try {
         const response = await fetch(uploadLink, {
             method: "PUT",
