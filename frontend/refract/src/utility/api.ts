@@ -13,8 +13,10 @@ export interface JobStatus {
     output_url?: string;
 };
 
-export const s3BucketURL: string = process.env.S3_BUCKET_URL || '';
-export const apiEndpoint: string = process.env.API_ENDPOINT || '';
+/* SET IN VERCEL */
+/* HARDCODED FOR TESTING */
+export const s3BucketURL: string = process.env.S3_BUCKET_URL || 'http://refract-images.s3-website-us-west-1.amazonaws.com';
+export const apiEndpoint: string = process.env.API_ENDPOINT || 'https://qzklhiba4m.execute-api.us-west-1.amazonaws.com';
 
 if (apiEndpoint === '') {
     console.error('API_ENDPOINT not found in environment variables');
@@ -46,6 +48,7 @@ export async function queueModel(
     const method = 'POST';
     const headers = {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         // 'Authorization': `Bearer ${auth_token}`,
     };
     
@@ -85,6 +88,9 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
 
     const url = new URL(`${apiEndpoint}/refract_get_upload_link`);
     url.searchParams.append('extension', ext);
+
+    console.log(`getUploadLinkUrl: ${url.toString()}`);
+
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
@@ -98,14 +104,9 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
     try {
         const response = await fetch(url.toString(), options);
         if (response.ok) {
-            const data = response.json();
-            data.then((json) => {
-                return json;
-            }).catch((error) => {
-                throw error;
-            }
-        );
-    }
+            const data = await response.json();
+            return data;
+        }
     } catch (error) {
         console.error(error);
         throw new Error('Error getting upload link');
@@ -120,16 +121,16 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
  * 
  **/
 export async function uploadImage(imageFile: File, uploadLink: string): Promise<string | void> {
-    const formData = new FormData();
-    formData.append('file', imageFile);
-
-    const options = {
-        method: 'PUT',
-        body: formData,
-    };
 
     try {
-        const response = await fetch(uploadLink, options);
+        const response = await fetch(uploadLink, {
+            method: "PUT",
+            mode: 'cors',
+            body: imageFile,
+            headers: {
+             "Content-type": imageFile.type,
+            }
+           });
         if (response.ok) {
             return uploadLink;
         }
@@ -156,6 +157,7 @@ export async function getJobStatus(job_id: number): Promise<JobStatus | void> {
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
     };
     
     const options = {

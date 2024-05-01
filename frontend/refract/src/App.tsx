@@ -21,7 +21,15 @@ function App() {
     const alpha = 5.00;
 
     try {
-      const uploadLink = await getUploadLinkURL(inputImage.name.split('.').pop() || '');
+      const extension = inputImage.name.split('.').pop()?.toLowerCase() || '';
+
+      console.log(inputImage);
+      console.log(extension);
+
+      const uploadLink = await getUploadLinkURL(extension);
+
+      console.log("Upload Link: ");
+      console.log(uploadLink);
 
       if (uploadLink === undefined) {
         throw new Error('Error getting upload link');
@@ -29,7 +37,7 @@ function App() {
 
       await uploadImage(inputImage, uploadLink.url);
 
-      const input_path = `{s3BucketURL}/in/${uploadLink.filename}`;
+      const input_path = `${s3BucketURL}/in/${uploadLink.filename}`;
 
       const job_id = await queueModel(input_path, compress_size, p_allow, alpha);
 
