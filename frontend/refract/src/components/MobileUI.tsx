@@ -18,6 +18,9 @@ export const MobileUI: React.FC<MobileUIProps> = ({
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const [inputImage, setInputImage] = React.useState<File | null>(null);
+
+  // TODO: REMOVE THIS
+  // outputImage automatically updates when model successfully runs
   const [outputURL, setOutputURL] = React.useState<string | undefined>("https://m.media-amazon.com/images/I/51y8GUVKJoL.jpg");
 
   const [hasInput, setHasInput] = React.useState<boolean>(false);
@@ -60,6 +63,8 @@ export const MobileUI: React.FC<MobileUIProps> = ({
             <div className="flex flex-col flex-1 items-stretch text-white">
               <div className="flex flex-row justify-between">
                   <div className="font-bold">1. Upload Image</div>
+
+                  { /* TODO: Set styling to force rounded button on mobile */ }
                   <button
                     className="justify-center self-center p-0.5 disabled:text-gray-400 enabled:text-black text-sm
                     bg-indigo-200 rounded-2xl enabled:active:hover:bg-indigo-300 enabled:active:bg-indigo-400 
@@ -71,6 +76,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                       fileInputRef.current!.value = "";
                     }}
                   >Clear File</button>
+                  {/* TODO: Make clear file button look nicer */}
                 {/* <div className="text-slate-300">image.png</div> */}
               </div>
 
