@@ -94,7 +94,6 @@ export async function getUploadLinkURL(ext: string): Promise< {url: string, file
     const method = 'GET';
     const headers = {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
     };
     
     const options = {
