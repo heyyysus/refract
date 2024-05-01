@@ -31,8 +31,8 @@ const isValidExtension = (ext: string) => {
 
 const createPresignedImageUploadUrl = async (user_id: string, extension: string) => {
     const s3 = new S3();
-    const region = "us-west-1";
-    const bucket = "refract-data";
+    const region = "us-west-2";
+    const bucket = "refract-images";
     const dateTime = Date.now();
     const filename = `${user_id}-${dateTime}.${extension}`;
     const key = `in/${filename}`;
@@ -40,7 +40,7 @@ const createPresignedImageUploadUrl = async (user_id: string, extension: string)
         Bucket: bucket,
         Key: key,
         Expires: 100,
-        ContentType: `image/${extension}`
+        ContentType: `image/${extension}`,
     });
 
     return { url: presignedUrl, filename: filename }

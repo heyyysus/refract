@@ -15,7 +15,7 @@ export interface JobStatus {
 
 /* SET IN VERCEL */
 /* HARDCODED FOR TESTING */
-export const s3BucketURL: string = process.env.S3_BUCKET_URL || 'http://refract-data.s3-website-us-west-2.amazonaws.com';
+export const s3BucketURL: string = process.env.S3_BUCKET_URL || 'http://refract-images.s3-website-us-west-1.amazonaws.com';
 export const apiEndpoint: string = process.env.API_ENDPOINT || 'https://qzklhiba4m.execute-api.us-west-1.amazonaws.com';
 
 if (apiEndpoint === '') {
@@ -130,7 +130,6 @@ export async function uploadImage(imageFile: File, uploadLink: string): Promise<
             body: imageFile,
             headers: {
              "Content-type": imageFile.type,
-             "Access-Control-Allow-Origin": "*",
             }
            });
         if (response.ok) {
