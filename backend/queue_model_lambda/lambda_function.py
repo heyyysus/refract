@@ -3,6 +3,8 @@ import botocore
 import json
 import time
 
+from decimal import Decimal
+
 '''
 
 Query Params:
@@ -24,8 +26,8 @@ def lambda_handler(event, context):
       user_id = "test_user_id"
 
       compress_size = int(event['queryStringParameters']['compress_size'])
-      p_allow = float(event['queryStringParameters']['p_allow'])
-      alpha = float(event['queryStringParameters']['alpha'])
+      p_allow = Decimal(event['queryStringParameters']['p_allow'])
+      alpha = Decimal(event['queryStringParameters']['alpha'])
 
       dynamodb = boto3.resource('dynamodb')
       table = dynamodb.Table('refract_jobs')
