@@ -52,7 +52,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
       const cloakStrength = cloakStrengthRef.current?.value || '0';
       const renderTime = renderTimeRef.current?.value || '0';
 
-      const alpha = (parseInt(cloakStrength) / 100.0) * 5.0;
+      const alpha = 5.5 - (parseInt(cloakStrength) / 100.0) * 5.0;
       const compress_size = (parseInt(renderTime) >= 50) ? 512 : 160;
 
       console.log(`alpha: ${alpha}`);
