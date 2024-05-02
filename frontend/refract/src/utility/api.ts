@@ -61,13 +61,8 @@ export async function queueModel(
     try {
         const response = await fetch(url.toString(), options);
         if (response.ok) {
-            const data = response.json();
-            data.then((json) => {
-                return json['job_id'];
-            }).catch((error) => {
-                throw error;
-            }
-        );
+            const data = await response.json();
+            return data.job_id;
     }
     } catch (error) {
         console.error(error);
