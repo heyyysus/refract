@@ -166,15 +166,9 @@ export async function getJobStatus(job_id: number): Promise<JobStatus | void> {
     try {
         const response = await fetch(url.toString(), options);
         if (response.ok) {
-            const data = response.json();
-            data.then((json) => {
-                return json;
-            }
-            ).catch((error) => {
-                throw error;
-            }
-        );
-    }
+            const data = await response.json();
+            return data;
+        }
     } catch (error) {
         console.error(error);
         throw new Error('Error getting job status');
