@@ -13,12 +13,8 @@ function App() {
 
   // const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
-  const handleRunModel = async (inputImage: File): Promise<void> => {
+  const handleRunModel = async (inputImage: File, compress_size: number,  p_allow: number, alpha: number): Promise<void> => {
     console.log('Running Model');
-
-    const compress_size = 160;
-    const p_allow = 0.00;
-    const alpha = 5.00;
 
     try {
       const extension = inputImage.name.split('.').pop()?.toLowerCase() || '';
@@ -26,7 +22,7 @@ function App() {
       console.log(inputImage);
       console.log(extension);
 
-      const uploadLink = await getUploadLinkURL(extension);
+      const uploadLink = await getUploadLinkURL((extension === 'jpeg') ? 'jpg' : extension);
 
       console.log("Upload Link: ");
       console.log(uploadLink);

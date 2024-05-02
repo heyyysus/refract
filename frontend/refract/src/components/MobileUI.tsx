@@ -4,7 +4,7 @@ import * as React from "react";
 export interface MobileUIProps {
   className?: string;
   outputImage: string | null;
-  handleRunModel: (inputImage: File) => Promise<void>;
+  handleRunModel: (inputImage: File, compress_size: number, p_allow: number, alpha: number) => Promise<void>;
 }
 
 const delay = (ms:number) => new Promise(res => setTimeout(res, ms));
@@ -16,6 +16,8 @@ export const MobileUI: React.FC<MobileUIProps> = ({
 }) => {
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const cloakStrengthRef = React.useRef<HTMLInputElement>(null);
+  const renderTimeRef = React.useRef<HTMLInputElement>(null);
 
   const [inputImage, setInputImage] = React.useState<File | null>(null);
 
@@ -46,7 +48,17 @@ export const MobileUI: React.FC<MobileUIProps> = ({
       setIsRunning(true);
       await delay(5000);
       // insert code to actually load...
-      await handleRunModel(inputImage!);
+
+      const cloakStrength = cloakStrengthRef.current?.value || '0';
+      const renderTime = renderTimeRef.current?.value || '0';
+
+      const alpha = (parseInt(cloakStrength) / 100.0) * 5.0;
+      const compress_size = (parseInt(renderTime) >= 50) ? 512 : 160;
+
+      console.log(`alpha: ${alpha}`);
+      console.log(`compress_size: ${compress_size}`);
+
+      await handleRunModel(inputImage!, compress_size, 0.0, alpha);
       setOutputURL(URL.createObjectURL(inputImage!));
       setIsRunning(false);
       setHasOutput(true);
@@ -136,6 +148,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                 id="labels-range-input" type="range" step="25"  
                 className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
                 disabled={isRunning}
+                ref={cloakStrengthRef}
                 />
                 <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-0 -bottom-6">Min</span>
                 <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Low</span>
@@ -153,6 +166,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                 id="labels-range-input" type="range" step="25" 
                 className="w-full bg-white h-1 rounded-lg appearance-none cursor-pointer"
                 disabled={isRunning}
+                ref={renderTimeRef}
                 />
                 <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-0 -bottom-6">Min</span>
                 <span className="text-sm text-gray-500 dark:text-gray-500 absolute start-1/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">Low</span>
