@@ -41,6 +41,8 @@ function App() {
 
       const job_id = await queueModel(input_path, compress_size, p_allow, alpha);
 
+      console.log(job_id);
+
       if (job_id === undefined) {
         throw new Error('Error queuing model');
       }
