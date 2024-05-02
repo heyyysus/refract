@@ -102,7 +102,7 @@ class FaceCloakModel:
         optimizer = torch.optim.Adam([x_cloaked], lr=self.learning_rate)
 
         print("\nStarting optimization")
-        for i in range(200):
+        for i in range(100):
             optimizer.zero_grad()
             loss, l2_loss, lpips_loss = self.loss_fn(x_cloaked, y_copy, x)
             loss.backward()
