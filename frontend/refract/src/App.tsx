@@ -46,14 +46,20 @@ function App() {
       if (job_id === undefined) {
         throw new Error('Error queuing model');
       }
+      
 
+      let job_save = null;
       let status = 'queued';
       while (status === 'queued' || status === 'running') {
-        const job_status = await getJobStatus(job_id);
-        status = job_status ? job_status.status : 'client_error';
+        const job = await getJobStatus(job_id);
+        status = job ? job.status : 'client_error';
         console.log(status);
-
+        job_save = job;
       }
+
+      const output_url = job_save?.output_url;
+      console.log(output_url);
+      if (output_url) setOutputImage(output_url);
 
     } catch (error) {
       console.error(error);

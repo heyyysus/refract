@@ -182,9 +182,9 @@ export const MobileUI: React.FC<MobileUIProps> = ({
             {!isRunning && hasOutput && 
             <img
               className="h-full w-full mt-4 object-cover"
-              src={outputURL}
+              src={outputImage || outputURL}
             />}
-            <a href={outputURL} download target="_blank">
+            <a href={outputImage || outputURL} download target="_blank">
               <button
                 className="grow justify-center self-center px-9 p-3.5 mt-3 mb-3 disabled:text-gray-400 enabled:text-black 
                 bg-indigo-200 rounded-2xl enabled:active:hover:bg-indigo-300 enabled:active:bg-indigo-400 
