@@ -12,7 +12,7 @@ import os
 dynamodb = boto3.resource('dynamodb', region_name='us-west-1')
 table = dynamodb.Table('refract_jobs')
 
-s3_path = "http://refract-data.s3-website-us-west-2.amazonaws.com"
+s3_path = "http://refract-images.s3-website-us-west-1.amazonaws.com"
 
 def check_latest_job():
     response = table.scan()
