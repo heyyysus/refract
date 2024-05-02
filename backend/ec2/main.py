@@ -74,11 +74,11 @@ def main():
 
                     # Upload image to S3
                     s3 = boto3.client('s3')
-                    s3.upload_file(output_path, 'refract-data', f"{job['job_id']}-out.{ext}")
+                    s3.upload_file(output_path, 'refract-images', f"out/{job['job_id']}.{ext}")
 
                     print("Image uploaded to S3")
 
-                    job['output_url'] = f"{s3_path}/{job['job_id']}-out.{ext}"
+                    job['output_url'] = f"{s3_path}/out/{job['job_id']}.{ext}"
                     job['status'] = "completed"
                     job['completed_ts'] = int(time.time())
                     table.put_item(Item=job)
