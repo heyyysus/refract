@@ -22,7 +22,7 @@ function App() {
       console.log(inputImage);
       console.log(extension);
 
-      const uploadLink = await getUploadLinkURL((extension === 'jpeg') ? 'jpg' : extension);
+      const uploadLink = await getUploadLinkURL((extension === 'jpg') ? 'jpeg' : extension);
 
       console.log("Upload Link: ");
       console.log(uploadLink);
