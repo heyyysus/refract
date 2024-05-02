@@ -6,8 +6,14 @@ def run_model(compress_size = 512, p_allow = 0.0, alpha = 5, input_path = None, 
 
     print("\nProcessing image: ", input_path, " (", compress_size, ")" )
 
+    steps = 100
+
+    if compress_size == 512:
+        steps = 200
+    
+
     # Cloak the face
-    x_cloaked, x_copy, x_box, y_copy, y_path = model.cloak_face(input_path)
+    x_cloaked, x_copy, x_box, y_copy, y_path = model.cloak_face(input_path, steps=steps)
     if x_cloaked is None:
         return False
 

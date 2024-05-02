@@ -82,7 +82,7 @@ class FaceCloakModel:
         print("Min Norm: ", min_norm.item())
         return target_embedding, target_path
 
-    def cloak_face(self, x_path):
+    def cloak_face(self, x_path, steps=100):
         x, x_box = self.face_pipeline(x_path)
         if x is None:
             print("No face detected in the image")
@@ -102,7 +102,7 @@ class FaceCloakModel:
         optimizer = torch.optim.Adam([x_cloaked], lr=self.learning_rate)
 
         print("\nStarting optimization")
-        for i in range(100):
+        for i in range(steps):
             optimizer.zero_grad()
             loss, l2_loss, lpips_loss = self.loss_fn(x_cloaked, y_copy, x)
             loss.backward()
