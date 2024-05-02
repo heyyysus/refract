@@ -150,7 +150,7 @@ export async function getJobStatus(job_id: number): Promise<JobStatus | void> {
         throw new Error('API_ENDPOINT not found in environment variables');
     }
 
-    const url = new URL(`${apiEndpoint}/refract_get_job_status`);
+    const url = new URL(`${apiEndpoint}/refract_get_job`);
     url.searchParams.append('job_id', job_id.toString());
     const method = 'GET';
     const headers = {
