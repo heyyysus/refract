@@ -50,7 +50,7 @@ function App() {
       let status = 'queued';
       while (status === 'queued' || status === 'running') {
         const job_status = await getJobStatus(job_id);
-        status = job_status ? job_status.status : 'error';
+        status = job_status ? job_status.status : 'client_error';
         console.log(status);
 
       }
