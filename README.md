@@ -1,4 +1,4 @@
 # Refract
-Cloaks photos of individuals to protect against deepfakes.
-
 Team Members: Ysabel Chen, Gen Tamada, Emily Tian, Jesus Velarde, Christy Yu
+
+Refract aims to cloak photos of individuals to protect against unauthorized training for deepfakes, facial recognition, and other harmful forms of identity theft. To do this, our model selects a target image that is similar to the inputted one. Refract then introduces subtle details in the original image to make it appear like the target photo to data models without introducing human-noticeable changes in the output photo. Refract has seen significant results in altering photos on the feature-level while maintaining strong visual similarities between the original and output photos, thereby successfully disrupting the feature-identifying capabilities of image-processing models. With our model, individuals can cloak their photos before uploading them to social media with the confidence that their identity will be protected; with Refract, we can mitigate the widespread negative effects of facial recognition technologies, identity theft, and deepfake generators.
