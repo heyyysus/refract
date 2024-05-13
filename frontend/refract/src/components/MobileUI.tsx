@@ -63,7 +63,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
   return (
   <div className="flex flex-col mx-auto w-[100%] bg-slate-600 font-Segoe UI Emoji">
     <div className="flex flex-col items-center mx-auto w-full">
-      <div className="flex flex-col gap-0 mt-2 text-base tracking-tight leading-4 text-center whitespace-nowrap px-5 xl:w-[40%] lg:w-[60%] md:w-[80%] sm:w-[90%] content-center">
+      <div className="flex flex-col gap-0 mt-2 text-base tracking-tight leading-4 text-center whitespace-nowrap px-5 xl:w-[60%] lg:w-[80%] md:w-[90%] sm:w-[100%] content-center">
         <img className="flex my-5 w-[70%] self-center" src="https://i.ibb.co/5cnmX59/Refract-Presentation-removebg-preview.png" />
         <ul
           className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
