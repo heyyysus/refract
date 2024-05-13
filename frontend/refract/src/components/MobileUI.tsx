@@ -103,7 +103,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
           </li>
         </ul>
         {openTab === 1 && 
-        <div className="flex flex-col grow shrink-0 basis-0 w-full px-5 pb-5">
+        <div className="flex flex-col grow shrink-0 basis-0 w-full pb-5">
           <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500">
             <div className="flex flex-col flex-1 items-stretch text-white">
               <div className="flex flex-row justify-between">
@@ -207,7 +207,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
           </div>
         </div>}
         {openTab === 2 && 
-        <div className="flex flex-col grow shrink-0 basis-0 w-full px-5 pb-5 text-white leading-relaxed">
+        <div className="flex flex-col grow shrink-0 basis-0 w-full pb-5 text-white leading-relaxed">
           <div className="text-3xl font-bold text-center mb-4">About Refract</div>
           
           <div className="mb-8 ">
@@ -232,7 +232,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
           </div>
           
           <div className="mb-8">
-            <div className="text-2xl font-semibold pb-2">Components Used</div>
+            <div className="text-2xl font-semibold pb-2">Tech Used</div>
             <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500 text-wrap">
               <ul className="list-disc pl-5 mt-2 text-left">
                 <li>Python for backend logic</li>
@@ -256,7 +256,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
     </div>
     <div className="flex flex-col items-center py-5 text-sm text-white bg-slate-400 px-10">
       <div className="flex flex-row gap-2">
-        <div>© 2022 Created by Ysabel Chen, Gen Tamada, Emily Tian, Jesus Velarde, Christy Yu.</div>
+        <div>© 2024 Created by Ysabel Chen, Gen Tamada, Emily Tian, Jesus Velarde, Christy Yu.</div>
       </div>
       <div className="flex flex-row gap-2">
         <div>View on</div>
