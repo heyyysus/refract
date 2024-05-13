@@ -103,7 +103,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
           </li>
         </ul>
         {openTab === 1 && 
-        <div className="flex flex-col grow shrink-0 basis-0 w-full px-9 pb-5">
+        <div className="flex flex-col grow shrink-0 basis-0 w-full px-5 pb-5">
           <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500">
             <div className="flex flex-col flex-1 items-stretch text-white">
               <div className="flex flex-row justify-between">
@@ -207,7 +207,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
           </div>
         </div>}
         {openTab === 2 && 
-        <div className="flex flex-col grow shrink-0 basis-0 w-full px-9 pb-5 text-white leading-relaxed">
+        <div className="flex flex-col grow shrink-0 basis-0 w-full px-5 pb-5 text-white leading-relaxed">
           <div className="text-3xl font-bold text-center mb-4">About Refract</div>
           
           <div className="mb-8 ">
