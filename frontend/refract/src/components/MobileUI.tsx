@@ -29,11 +29,7 @@ export const MobileUI: React.FC<MobileUIProps> = ({
   const [isRunning, setIsRunning] = React.useState<boolean>(false);
   const [hasOutput, setHasOutput] = React.useState<boolean>(false);
 
-  // const fileInputRef = React.useRef<HTMLInputElement>(null);
-
-  // const handleButtonClick = () => {
-  //   if (fileInputRef.current) fileInputRef.current.click();
-  // };
+  const [openTab, setOpenTab] = React.useState(1);
 
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
@@ -65,18 +61,53 @@ export const MobileUI: React.FC<MobileUIProps> = ({
   }
 
   return (
-    <div className="flex flex-col items-center mx-auto w-full bg-slate-600 font-Segoe UI Emoji max-w-[480px]">
-      <div className="flex gap-0 justify-center self-stretch px-5">
-        <div className="flex gap-1 justify-center px-11 py-6 text-lg tracking-tight leading-3 text-center text-black whitespace-nowrap font-[590]"></div>
-      </div>
-      <div className="flex gap-0 mt-2 text-base tracking-tight leading-4 text-center whitespace-nowrap">
-        <div className="flex flex-col grow shrink-0 basis-0 w-fit px-9 pb-5">
+  <div className="flex flex-col mx-auto w-[100%] bg-slate-600 font-Segoe UI Emoji">
+    <div className="flex flex-col items-center mx-auto w-full">
+      <div className="flex flex-col gap-0 mt-2 text-base tracking-tight leading-4 text-center whitespace-nowrap px-5 xl:w-[40%] lg:w-[60%] md:w-[80%] sm:w-[90%] content-center">
+        <img className="flex my-5 w-[70%] self-center" src="https://i.ibb.co/5cnmX59/Refract-Presentation-removebg-preview.png" />
+        <ul
+          className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+          role="tablist"
+        >
+          <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a
+              className={
+                "text-xl font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                (openTab === 1
+                  ? "text-white bg-indigo-400"
+                  : "text-indigo-400 bg-white")
+              }
+              onClick={e => {
+                e.preventDefault();
+                setOpenTab(1);
+              }}
+            >
+              Demo
+            </a>
+          </li>
+          <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a
+              className={
+                "text-xl font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                (openTab === 2
+                  ? "text-white bg-indigo-400"
+                  : "text-indigo-400 bg-white")
+              }
+              onClick={e => {
+                e.preventDefault();
+                setOpenTab(2);
+              }}
+            >
+                About
+            </a>
+          </li>
+        </ul>
+        {openTab === 1 && 
+        <div className="flex flex-col grow shrink-0 basis-0 w-full px-9 pb-5">
           <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500">
             <div className="flex flex-col flex-1 items-stretch text-white">
               <div className="flex flex-row justify-between">
                   <div className="font-bold">1. Upload Image</div>
-
-                  { /* TODO: Set styling to force rounded button on mobile */ }
                   <button
                     className="justify-center self-center p-0.5 disabled:text-gray-400 enabled:text-black text-sm
                     bg-indigo-200 rounded-2xl enabled:active:hover:bg-indigo-300 enabled:active:bg-indigo-400 
@@ -88,29 +119,8 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                       fileInputRef.current!.value = "";
                     }}
                   >Clear File</button>
-                  {/* TODO: Make clear file button look nicer */}
-                {/* <div className="text-slate-300">image.png</div> */}
               </div>
-
-              {/* <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"></input> */}
-
-
               <div className="flex-column justify-center">
-                {/* <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
-                  ref={fileInputRef}
-                /> */}
-                {/* <input className="grow justify-center self-center py-3.5 mt-5 rounded-2xl dark:bg-gray-700" id="file_input" type="file" accept="image/*" onChange={(e) => handleFileChange(e)}></input> */}
-                
-                {/* <label
-                  htmlFor="formFile"
-                  className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
-                >
-                Default file input example
-                </label> */}
                 <input
                   className="relative m-0 block w-full min-w-0 flex-auto py-3.5 mt-5 rounded-2xl dark:bg-slate-400 file:disabled:text-gray-400 disabled:text-gray-500
                   bg-clip-padding px-3 py-[0.32rem] text-base text-neutral-700 file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 
@@ -124,16 +134,6 @@ export const MobileUI: React.FC<MobileUIProps> = ({
                 id="formFile"
                 />
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF</p>
-
-                {/* <button
-                  className="grow justify-center self-center px-9 py-3.5 mr-2 mt-5 rounded-2xl
-                  bg-[#9F7DFF] hover:bg-violet-600 enabled:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-                  onClick={(e: any) => {
-                    handleButtonClick();
-                  }}
-                >
-                  Upload
-                </button> */}
               </div>
             </div>
           </div>
@@ -185,8 +185,6 @@ export const MobileUI: React.FC<MobileUIProps> = ({
               Run model
             </button>
           </div>
-          {/* <div className="shrink-0 self-end mt-5 rounded border border-solid bg-slate-600 bg-opacity-50 border-white border-opacity-50 h-[275px] w-[9px]" /> */}
-
           <div className="flex flex-col items-center px-9 py-6 mt-3 text-white whitespace-nowrap rounded-2xl bg-slate-500">
             <div className="flex self-start font-bold">3. Results</div>
             {isRunning && 
@@ -207,8 +205,64 @@ export const MobileUI: React.FC<MobileUIProps> = ({
               > Download </button>
             </a>
           </div>
-        </div>
+        </div>}
+        {openTab === 2 && 
+        <div className="flex flex-col grow shrink-0 basis-0 w-full px-9 pb-5 text-white leading-relaxed">
+          <div className="text-3xl font-bold text-center mb-4">About Refract</div>
+          
+          <div className="mb-8 ">
+            <div className="text-2xl font-semibold pb-2">Description</div>
+            <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500 text-wrap">
+              Refract is a cutting-edge model designed to cloak photos of individuals
+              to protect them against unauthorized use in facial recognition technologies,
+              deepfakes, and other forms of digital identity theft. This model subtly alters
+              facial features in images to confuse data models while keeping changes imperceptible
+              to human observers.
+            </div>
+          </div>
+          
+          <div className="mb-8">
+            <div className="text-2xl font-semibold pb-2">Implementation</div>
+            <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500 text-wrap">
+              The Refract model integrates advanced image processing algorithms to selectively
+              alter facial data points. It operates by identifying target features in images and
+              applying slight modifications that significantly impede machine learning algorithms
+              without affecting the image's appearance for human viewers.
+            </div>
+          </div>
+          
+          <div className="mb-8">
+            <div className="text-2xl font-semibold pb-2">Components Used</div>
+            <div className="flex gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500 text-wrap">
+              <ul className="list-disc pl-5 mt-2 text-left">
+                <li>Python for backend logic</li>
+                <li>Pytorch and Torchvision for image transformations</li>
+                <li><a href="https://github.com/timesler/facenet-pytorch" className="text-indigo-400">Pytorch Facenet pre-trained MTCNN</a> for feature embedding extraction</li>
+                <li><a href="https://github.com/richzhang/PerceptualSimilarity" className="text-indigo-400">LPIPS</a> for perceptual similarity measurement</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mb-8 content-center">
+            <h2 className="text-2xl font-semibold">Authors</h2>
+            <div className="flex flex-col gap-4 px-9 py-6 items-stretch rounded-2xl bg-slate-500 text-wrap">
+              <img src="https://i.ibb.co/f2nyCJD/IMG-5960-1.jpg" alt="Group of authors" className="object-cover rounded-1 max-w-full shadow-lg" />
+            </div>
+          </div>
+        </div>}
+        {/* a footer that contains the following text, and a link to github 
+        © 2022 Created by Gen Tamada with React.js and Chakra UI. All rights reserved. Last edit: 5/11/2024*/}
       </div>
     </div>
+    <div className="flex flex-col items-center py-5 text-sm text-white bg-slate-400 px-10">
+      <div className="flex flex-row gap-2">
+        <div>© 2022 Created by Ysabel Chen, Gen Tamada, Emily Tian, Jesus Velarde, Christy Yu.</div>
+      </div>
+      <div className="flex flex-row gap-2">
+        <div>View on</div>
+        <a href="https://github.com/heyyysus/refract" className="text-indigo-500">Github</a>
+      </div>
+    </div>
+  </div>
   );
 };
